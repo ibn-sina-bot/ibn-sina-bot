@@ -1,17 +1,15 @@
-from flask import Flask, request, jsonify
+pfrom flask import Flask, request, jsonify
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 import unicodedata
 import random
 import sys
+import os
 
-sys.stdout.reconfigure(encoding='utf-8')
-
-app = Flask(__name__)
-
-def شيل_تشكيل(نص):
-    return ''.join(c for c in unicodedata.normalize('NFD', نص) if unicodedata.category(c) != 'Mn')
+git add api.py
+git commit -m "تعديل api.py للتوافق مع PythonAnywhere"
+git push
 
 ردود = {
     "اهلا": ["اهلا بيك!", "يا هلا!", "اهلا وسهلا!"],
@@ -69,4 +67,5 @@ def chat():
     return jsonify({'reply': response})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
