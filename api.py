@@ -31,6 +31,14 @@ def chat():
 
     return jsonify({'reply': response})
 
+# مسار إضافي لعرض تاريخ المحادثات
+@app.route('/history', methods=['GET'])
+def history():
+    user_id = request.args.get('user_id', request.remote_addr)
+    if user_id in chat_memory:
+        return jsonify({'history': chat_memory[user_id]})
+    return jsonify({'history': []})
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
